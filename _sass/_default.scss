@@ -103,7 +103,7 @@ strong {
 }
 
 .menu__entry a {
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .social-links {
@@ -238,6 +238,30 @@ strong {
 .about__return {
     font-size: 20px;
     margin-bottom: 20px;
+    display: block;
+    width: auto;
+    overflow: hidden;
+}
+
+.about__return a {
+    display: block;
+    float: left;
+    text-align: left;
+    margin: 1em 0;
+}
+
+.about__return .about__nav {
+    width: 40%;
+}
+
+.about__return :not(.about__nav) {
+    width: 20%;
+    text-align: center;
+}
+
+.about__return .next {
+    text-align: right;
+    float: right;
 }
 
 .about__devider {
@@ -344,4 +368,13 @@ strong {
   background-size: 100% 88%;
   background-position: 0 88%;
   transition: background-size 0.25s ease-in;
+}
+
+
+$darkcloudy: darken($cloudy, 25%);
+.hover_link {
+    transition: color 0.2s ease-in;
+    &:hover {
+        color: $darkcloudy
+    }
 }
