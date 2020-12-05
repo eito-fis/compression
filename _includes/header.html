@@ -1,10 +1,10 @@
 <header class="header">
     <div class="navigation">
-        <a href="/" class="logo">{{ site.title }}</a>
+        <a href="{{ '/' | prepend: site.baseurl }}" class="logo">Discrete 2020</a>
 
         <ul class="menu">
             <li class="menu__entry"><a href="{{ '/about' | prepend: site.baseurl }}">About</a></li>
-            <li class="menu__entry"><a href="{{ '/' | prepend: site.baseurl }}">Blog</a></li>
+            <li class="menu__entry"><a href="{{ '/' | prepend: site.baseurl }}">Home</a></li>
         </ul>
     </div>
 
