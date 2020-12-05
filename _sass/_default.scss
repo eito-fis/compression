@@ -138,7 +138,6 @@ strong {
 }
 
 .post-title {
-    margin-bottom: 110px;
 }
 
 .post-title__text {
@@ -334,6 +333,8 @@ strong {
   &:hover {
     background-size: 100% 88%;
   }
+  display: inline-block;
+  width: auto;
 }
 
 .magical {
