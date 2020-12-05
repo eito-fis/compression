@@ -234,10 +234,15 @@ strong {
     line-height: 24px;
 }
 
+.about__return {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
 .about__devider {
     font-size: 20px;
-    margin-bottom: 50px;
-    letter-spacing: 9.09px;
+    margin-bottom:50px;
 }
 
 .about__text {
@@ -275,8 +280,20 @@ strong {
         margin-bottom: 50px;
     }
 
+    // .logo {
+    //     font-size: 32px;
+    // }
+
+    // .page-title__text {
+    //     font-size: 50px;
+    // }
+
+    .logo {
+        font-size: 50px;
+    }
+
     .page-title__text {
-        font-size: 40px;
+        font-size: 32px;
     }
 
     .page-title__subtitle {
