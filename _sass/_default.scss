@@ -138,6 +138,8 @@ strong {
 }
 
 .post-title {
+  display: inline-block;
+  width: auto;
 }
 
 .post-title__text {
@@ -234,9 +236,8 @@ strong {
 }
 
 .about__return {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 20px;
-    font-weight: normal;
 }
 
 .about__devider {
