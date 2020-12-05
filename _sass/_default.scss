@@ -244,6 +244,10 @@ strong {
 }
 
 .about__return a {
+    margin: 0;
+}
+
+.about__return div {
     display: block;
     float: left;
     text-align: left;
@@ -254,7 +258,11 @@ strong {
     width: 40%;
 }
 
-.about__return :not(.about__nav) {
+.about__nav a {
+    margin: 0;
+}
+
+.about__return .about__center {
     width: 20%;
     text-align: center;
 }
