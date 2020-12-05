@@ -5,3 +5,7 @@
 <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 {% if page.tags %}<meta name="keywords" content="{{ page.tags | join: ', ' }}">{% endif %}
 <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.url }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "/icon/apple-touch-icon.png" | prepend: site.baseurl }}">
+<link rel="icon" sizes="32x32" href="{{ "/icon/favicon-32x32.png" | prepend: site.baseurl }}">
+<link rel="icon" sizes="16x16" href="{{ "/icon/favicon-16x16.png" | prepend: site.baseurl }}">
+<link rel="manifest" href="{{ "/icon/site.webmanifest" | prepend: site.baseurl }}">
