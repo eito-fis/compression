@@ -362,6 +362,11 @@ strong {
 
     .about__arrow {
         font-size: 36px;
+        line-height: 36px;
+    }
+
+    .about__center {
+        line-height: 36px;
     }
 }
 
@@ -381,8 +386,8 @@ strong {
 .magical {
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
   background-repeat: no-repeat;
-  background-size: 100% 88%;
-  background-position: 0 88%;
+  background-size: 100% 95%;
+  background-position: 0 95%;
   transition: background-size 0.25s ease-in;
 }
 
