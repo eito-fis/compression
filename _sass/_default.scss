@@ -370,6 +370,7 @@ strong {
     }
 }
 
+
 .underline--magical {
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
   background-repeat: no-repeat;
@@ -415,7 +416,7 @@ $darkcloudy: darken($cloudy, 25%);
 $lesscloudy: transparentize($cloudy, 0.5);
 .navbar {
     position: sticky;
-    top: 50px;
+    top: 200px;
     left: 0px;
     font-size: 20px;
     padding-left: 10px;
@@ -449,3 +450,8 @@ $lesscloudy: transparentize($cloudy, 0.5);
     color: $darkcloudy
 }
 
+@media (max-width: 1200px) {
+    .navbar {
+	display: none;
+    }
+}
