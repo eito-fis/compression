@@ -5,6 +5,17 @@ layout: default
 
 <div class="content">
     {{ content }}
+	<div class="navwrap">
+	    <nav class="navbar" id="nav">
+	        <ul>
+	    	    <li><a href="#introduction">Introduction</a></li>
+	    	    <li><a href="#context">Context</a></li>
+	    	    <li><a href="#explanation">Explanation</a></li>
+	        </ul>
+	    </nav>
+	</div>
+	<div id="{{ '/' | prepend: site.baseurl }}"></div>
 </div>
+
 
 {% include post/about.html %}

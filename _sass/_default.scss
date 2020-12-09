@@ -400,3 +400,52 @@ $darkcloudy: darken($cloudy, 25%);
         color: $darkcloudy
     }
 }
+
+.content {
+    position: relative;
+}
+
+.navwrap {
+    position: absolute;
+    top: 0;
+    right: -160px;
+    height: 100%;
+}
+
+$lesscloudy: transparentize($cloudy, 0.5);
+.navbar {
+    position: sticky;
+    top: 50px;
+    left: 0px;
+    font-size: 20px;
+    padding-left: 10px;
+    border-left: 2px solid $lesscloudy;
+}
+
+.navbar ul {
+    list-style: None;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    padding: 5px 0;
+}
+
+.navbar ul li a {
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    background-repeat: no-repeat;
+    background-size: 99% 0.2em;
+    background-position: 50% 88%;
+    padding: 0 2px;
+    &:hover {
+        color: $darkcloudy
+    }
+    transition: background-size 0.25s ease-in, color 0.2s ease-in;
+}
+
+.active > a {
+    background-size: 100% 100% !important;
+    color: $darkcloudy
+}
+
