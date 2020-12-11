@@ -409,7 +409,7 @@ $darkcloudy: darken($cloudy, 25%);
 .navwrap {
     position: absolute;
     top: 0;
-    right: -160px;
+    right: -150px;
     height: 100%;
 }
 
@@ -419,7 +419,7 @@ $lesscloudy: transparentize($cloudy, 0.5);
     top: 200px;
     left: 0px;
     font-size: 20px;
-    padding-left: 28px;
+    padding-left: 20px;
     border-left: 2px solid $lesscloudy;
 }
 
