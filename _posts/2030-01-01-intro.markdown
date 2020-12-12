@@ -1,26 +1,19 @@
 ---
 layout: post
-title:  "Introduction"
-subtitle: "Feel home!"
-date:   2015-09-06 23:34:01
+title:  "Overview"
+subtitle: "Why Compression?"
+date:   2020-12-12
 categories: []
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+Every second of our lives we are absorbing and processing information. It surrounds and defines us. It is critical to the way our world functions, and we are constantly transmitting it. However, information transmission has limits. With our current methods of communication we can only send and process so much information at once. We can address our channel limitations, but it is often more effective to simply reduce the amount of information you need to send. This is called compression. 
 
-Jekyll also offers powerful support for code snippets:
+From the movie you’re watching on Netflix to the song you just played on Spotify, almost every digital medium we interact with has been compressed. The files that we interact with are often fractions of the original size, requiring less hardware space and allowing for quick transmission times. 
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+Without compression, the fast-paced interconnected world we know today could not exist.
 
-Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll’s dedicated Help repository][jekyll-help].
+However, the methodology for compression is often overlooked. In this project, we will explore three basic compression methods that serve as the building blocks for modern day compression standards:
 
-[jekyll]:      http://jekyllrb.com
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-help]: https://github.com/jekyll/jekyll-help
+- [**The Discrete Cosine Transform (DCT)**]({{ site.posts[1].url | prepend: site.baseurl }}){: .underline--magical }, which is a transformation widely used in signal processing (similar to the DFT from QEA) and image compression. 
+- [**Lempel Ziv Welch (LZW)**]({{ site.posts[2].url | prepend: site.baseurl }}){: .underline--magical }, which is an adaptive and lossless compression algorithm that is commonly used in GIF and TIFF. 
+- [**Arithmetic Coding**]({{ site.posts[3].url | prepend: site.baseurl }}){: .underline--magical }, which is a lossless compression algorithm that is similar to Huffman coding, and nears the theoretical limits of lossless compression. 
