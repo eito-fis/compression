@@ -26,33 +26,43 @@ Consider the case of compressing an image using the DCT. The main steps for this
 
 ### Represent an image as a matrix:
 
-As an example, consider the image on the left where one half is black and the other half is white. We can start by looking at the row of pixels highlighted in blue.
+![image to matrix]({{"/assets/images/DCT/image_to_matrix.png" | prepend: site.baseurl }}){: style="width:280px; float:left; margin:60px 40px"}
+
+As an example, consider the image to the left where one half is black and the other half is white. We can start by looking at the row of pixels highlighted in blue.
 
 Looking at this row, we can represent the shade of the image using numbers 0-255  for each pixel's shade.
 
-Doing this for the whole image, we create a matrix where each pixel in the image maps to a value in the matrix that represents its color. With a colored image, this matrix would have a height of 3 for each RGB value.
-
-Typically when performing the DCT an image matrix is broken up into blocks of size 8x8 to compress individually. 
+Doing this for the whole image, we create a matrix where each pixel in the image maps to a value in the matrix that represents its color. With a colored image, this matrix would have a height of 3 for each RGB value. 
+ 
+Typically when performing the DCT an image matrix is broken up into blocks of size 8x8 to compress individually.
 
 ### Create a DCT matrix:
+
+![dct equation]({{"/assets/images/DCT/equation.png" | prepend: site.baseurl }}){: style="width:280px; float:left; margin: 40px"}
 
 The DCT matrix can be thought of as a matrix containing cosine functions with varying frequencies. Equation X defines the cosine function for each position i, j in the matrix. 
 
 To illustrate this matrix, consider the fifth row. Plotting the row on the left we can see that it represents a cosine function of a frequency determined by N and i. 
 
+![cos wave]({{"/assets/images/DCT/cos.png" | prepend: site.baseurl }})
+
 The size N of the DCT matrix is usually 8x8 to match the size of our image matrix blocks.
 
 In the DCT matrix, higher frequency functions are in the lower right corner, whereas lower frequency functions are in the upper left corner.
+
+![dct matrix]({{"/assets/images/DCT/dct_matrix.png" | prepend: site.baseurl }}){: style="height: 400px"}
 
 We will use this matrix to find how much of each cosine function is present in the image.
 
 ### The transformation:
 
-
 Next, we will transform our image from the spatial domain to the frequency domain. This is done by multiplying each row of our image matrix f by our DCT matrix d. This operation can be thought of as finding how similar each row of pixels is with each cosine function. This yields a new matrix a, the same size as our original image that contains coefficients for the ‘amount’ of each vector in d for each row of pixels in our original image. This operation is also normally performed across the columns of the image blocks. (For more information on how that is done click here.)
 
+![dct multiplication]({{"/assets/images/DCT/mult.png" | prepend: site.baseurl }}){: style="height: 300px; margin-left: 5%"}
 
 ### Compression
+
+![converted matrix]({{"/assets/images/DCT/converted.png" | prepend: site.baseurl }}){: style="width:280px; float:left; margin:40px 40px"}
 
 After representing an image block as the amount of each cosine function defined by the DCT matrix, we are left with a matrix of weights a that is the size of our blocks.
 
