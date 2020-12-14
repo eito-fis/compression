@@ -35,7 +35,11 @@ Let’s go through an example where we use LZW to compress the string “babaa�
 
 The first thing we need to do is to create and initialize the code dictionary. 
 
+![lzw dictionary]({{"/assets/images/LZW/dict.png" | prepend: site.baseurl }}){: style="width:350px; float:left; margin:20px 40px"}
+
 For our dictionary, the indexes are the codes and the values at each index are the substrings. The dictionary typically holds a max of 4096 entries to ensure the LZW algorithm doesn’t use up too much memory. Additionally, the first 256 entries of the dictionary are preassigned to represent single byte ASCII characters (e.g. ‘j’, ‘a’, etc.), and serve as “base cases” to get the algorithm started. Each character takes up 8 bits and each code takes up 12 bits.
+
+![lzw diagram reference]({{"/assets/images/LZW/reference.png" | prepend: site.baseurl }}){: style="width:350px; float:right; margin:50px 20px"}
 
 Before we jump into processing the input, it’s worth mentioning this quick note about diagramming:
 
@@ -43,23 +47,63 @@ The purple highlight signifies that these characters have been processed with LZ
 
 Alright, let's get started with encoding the string “babaa”
 
+![step 1]({{"/assets/images/LZW/1.png" | prepend: site.baseurl }}){: style="width:200px; float:left; margin:20px 120px"}
+
 We start at the beginning of the string and set the current substring to “b”. Since b exists in the dictionary, we feed in another character from input. 
+
+![step 2]({{"/assets/images/LZW/2_lookup.png" | prepend: site.baseurl }}){: style="width:400px; float:left; margin:0px 20px"}
+
+<br>
 
 The current substring is “ba”. Since “ba” does not exist in the dictionary, we add it to the dictionary so that it corresponds to the next available code. 
 
+<br>
+
+![step 3]({{"/assets/images/LZW/2_write.png" | prepend: site.baseurl }}){: style="width:400px; float:left; margin:60px 20px"}
+
 We then take “b”, the longest section of “ba” that exists in the dictionary, and write the code associated with it to output. We also set the current substring to “a”, the last character of “ba”, and feed in another character. 
+
+![step 4]({{"/assets/images/LZW/3_lookup.png" | prepend: site.baseurl }}){: style="width:400px; float:left; margin:0px 20px"}
+
+<br>
 
 The current substring becomes “ab”. Since “ab” does not exist in the dictionary, similar as before, we add it to the dictionary to the next available code. 
 
+<br>
+
+![step 5]({{"/assets/images/LZW/3_write.png" | prepend: site.baseurl }}){: style="width:400px; float:left; margin:60px 20px"}
+
 We take “a”, the longest section of “ab” that’s in the dictionary, and write its code to output. We then set the current substring to “b”, the last character of “ab”, and feed in the next character from input. 
+
+![step 6]({{"/assets/images/LZW/4.png" | prepend: site.baseurl }}){: style="width:200px; float:left; margin:40px 120px"}
+
+<br>
 
 The current substring is “ba”. Since “ba” exists in the dictionary, we feed in another character from input. 
 
+<br>
+
+![step 7]({{"/assets/images/LZW/5_lookup.png" | prepend: site.baseurl }}){: style="width:400px; float:left; margin:0px 20px"}
+
+<br>
+
 The current substring updates to “baa”. Since “baa” does not exist in the dictionary, we add it to the dictionary to the next available code. 
+
+<br>
+
+![step 8]({{"/assets/images/LZW/5_write.png" | prepend: site.baseurl }}){: style="width:400px; float:left; margin:80px 20px"}
+
+<br>
 
 We take “ba”, the longest section of “baa” that’s in the dictionary, and write its code to output. We also set the current substring to “a”, the last character of “baa”. Note that we’ve exhausted our input.
 
+<br>
+
+![step 9]({{"/assets/images/LZW/6_write.png" | prepend: site.baseurl }}){: style="width:400px; float:left; margin:20px 20px"}
+
 Since there are no more characters left from input to feed in, we simply output the code of “a” to finish encoding. 
+
+<br>
 
 So did this process compress “babaa”? Let’s do some math: 
 
