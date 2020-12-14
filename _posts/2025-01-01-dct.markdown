@@ -1,102 +1,70 @@
 ---
 layout: post
 title:  "Discrete Cosine Transform"
-subtitle: "What you can do with it!"
+subtitle: ""
 date:   2014-08-19 23:56:45
 tag: toc
 categories: [tool]
 ---
 
-## History
+## Context
 
-Duis lacinia commodo dui, vel aliquam metus hendrerit eu. Integer et scelerisque dui. Sed nec molestie quam. Donec sit amet nisl a massa commodo ultrices nec quis nunc. Aenean aliquet eu arcu adipiscing dignissim. Nunc dictum elit vitae dolor molestie aliquet.
-
-
-Example code:
-
-{% highlight javascript %}
-var light = new Light();
-var switchUp = new FlipUpCommand(light);
-var switchDown = new FlipDownCommand(light);
-var s = new Switch();
-
-s.storeAndExecute(switchUp);
-s.storeAndExecute(switchDown);
-{% endhighlight %}
-
-
-A list:
-
-- Praesent nisi elit, bibendum ut consectetur ac, aliquet in nunc
-- Donec ante est, volutpat in mi et, pulvinar congue dolor.
-- Quisque ultrices pulvinar sollicitudin.
-- Duis elementum odio eu euismod suscipit.
-- Integer enim lorem, interdum sit amet consectetur non, bibendum eget neque.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies mi ac luctus dapibus. Maecenas faucibus magna vel nulla pretium, nec elementum risus venenatis. Praesent fermentum consectetur suscipit. Donec varius magna tortor. Vivamus pharetra finibus ligula et accumsan. Nunc ullamcorper convallis vulputate. Praesent imperdiet tortor ullamcorper orci semper rhoncus. Aliquam posuere tincidunt odio, eu venenatis orci tristique vitae. Etiam non porta elit. Nullam sit amet mi nulla. Donec tincidunt nibh vel augue condimentum sollicitudin. Vestibulum ultrices quam felis, eu volutpat lorem vehicula sed. Quisque efficitur dolor arcu, nec placerat elit rutrum sit amet. Sed elementum sem condimentum dapibus sodales.
-
-Proin sed tellus nec elit finibus malesuada id in diam. Donec ultrices metus eu quam dapibus eleifend. Sed facilisis tempus tortor, at elementum nisi tincidunt tincidunt. Integer sed vehicula mi. Phasellus sit amet bibendum massa. Curabitur rhoncus odio ac porta pharetra. Ut ultricies tincidunt lacinia. Donec varius suscipit dui, at molestie enim. Fusce vitae arcu in sapien feugiat tincidunt. Duis sed viverra metus.
-
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam posuere eros eu lorem semper iaculis. Sed nisi est, ornare eu luctus ac, facilisis sed lectus. In dapibus eleifend erat at tempus. Maecenas in pharetra neque, sit amet tempus urna. Mauris non nisl quis sapien pretium vestibulum. Phasellus imperdiet tellus non ante aliquet, non auctor mi ultricies. Aliquam nec neque sed ante placerat maximus vel eget velit.
-
-Nunc leo metus, varius id efficitur sit amet, pretium non tellus. Etiam non vehicula nulla. Sed pellentesque faucibus euismod. Phasellus mollis mollis leo vitae auctor. Ut facilisis ipsum auctor nibh vulputate, sit amet congue leo vestibulum. Etiam iaculis quis diam tincidunt eleifend. Sed vel erat non lacus facilisis pellentesque. Ut nec rutrum dolor, sit amet semper dui.
-
-Aliquam euismod vestibulum accumsan. Nunc imperdiet pellentesque gravida. Nulla hendrerit risus quis diam tempor tempus. Etiam in lectus odio. Duis a scelerisque lorem. Aenean in lorem a quam pellentesque finibus. Duis nec convallis elit. 
+The discrete cosine transform is widely used in signal processing, image compression, and many other forms of data compression. It was invented in the early 1970s by Nasir Ahmed while researching image data compression. The DCT is extremely effective at lossy compression, as it can achieve compression ratios of up to 100:1 with acceptable quality by human perceptive standards.The DCT is the basis for JPEG compression, and is an integral part of many other image and video compression standards.
 
 ## Overview
 
-A numbered list:
-
-1. Praesent nisi elit, bibendum ut consectetur ac, aliquet in nunc.
-2. Donec ante est, volutpat in mi et, pulvinar congue dolor.
-3. Quisque ultrices pulvinar sollicitudin.
-4. Duis elementum odio eu euismod suscipit.
-5. Integer enim lorem, interdum sit amet consectetur non, bibendum eget neque.
-
-Definition list:
-
-Curabitur cursus magna eu sem cursus
-: ac ultrices urna pharetra.
-: Duis scelerisque ipsum eu luctus elementum.
-
-Pellentesque habitant morbi tristique senectus
-: Curabitur malesuada lacus ac gravida porttitor
-: Duis sodales feugiat lorem et mollis.
-
-Want to suggest something? Please [Send me a request](https://github.com/kronik3r/daktilo/issues/new).
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies mi ac luctus dapibus. Maecenas faucibus magna vel nulla pretium, nec elementum risus venenatis. Praesent fermentum consectetur suscipit. Donec varius magna tortor. Vivamus pharetra finibus ligula et accumsan. Nunc ullamcorper convallis vulputate. Praesent imperdiet tortor ullamcorper orci semper rhoncus. Aliquam posuere tincidunt odio, eu venenatis orci tristique vitae. Etiam non porta elit. Nullam sit amet mi nulla. Donec tincidunt nibh vel augue condimentum sollicitudin. Vestibulum ultrices quam felis, eu volutpat lorem vehicula sed. Quisque efficitur dolor arcu, nec placerat elit rutrum sit amet. Sed elementum sem condimentum dapibus sodales.
-
-Proin sed tellus nec elit finibus malesuada id in diam. Donec ultrices metus eu quam dapibus eleifend. Sed facilisis tempus tortor, at elementum nisi tincidunt tincidunt. Integer sed vehicula mi. Phasellus sit amet bibendum massa. Curabitur rhoncus odio ac porta pharetra. Ut ultricies tincidunt lacinia. Donec varius suscipit dui, at molestie enim. Fusce vitae arcu in sapien feugiat tincidunt. Duis sed viverra metus.
-
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam posuere eros eu lorem semper iaculis. Sed nisi est, ornare eu luctus ac, facilisis sed lectus. In dapibus eleifend erat at tempus. Maecenas in pharetra neque, sit amet tempus urna. Mauris non nisl quis sapien pretium vestibulum. Phasellus imperdiet tellus non ante aliquet, non auctor mi ultricies. Aliquam nec neque sed ante placerat maximus vel eget velit.
-
-Nunc leo metus, varius id efficitur sit amet, pretium non tellus. Etiam non vehicula nulla. Sed pellentesque faucibus euismod. Phasellus mollis mollis leo vitae auctor. Ut facilisis ipsum auctor nibh vulputate, sit amet congue leo vestibulum. Etiam iaculis quis diam tincidunt eleifend. Sed vel erat non lacus facilisis pellentesque. Ut nec rutrum dolor, sit amet semper dui.
-
-Aliquam euismod vestibulum accumsan. Nunc imperdiet pellentesque gravida. Nulla hendrerit risus quis diam tempor tempus. Etiam in lectus odio. Duis a scelerisque lorem. Aenean in lorem a quam pellentesque finibus. Duis nec convallis elit. 
+The DCT can be thought of as representing images as a sum of cosine functions with varying frequencies. The basis for the DCT comes from the ability to represent a signal as amounts of each element in a set of discrete range of frequencies. This gives us a measure of what frequencies (or cosine functions) are most important in representing the signal, and allows us to  select only the frequencies that capture the most information about the image. It is important to note that in most cases the DCT results in lossy compression, where the original data is only approximated and not exactly recreated.
 
 ## Algorithm
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies mi ac luctus dapibus. Maecenas faucibus magna vel nulla pretium, nec elementum risus venenatis. Praesent fermentum consectetur suscipit. Donec varius magna tortor. Vivamus pharetra finibus ligula et accumsan. Nunc ullamcorper convallis vulputate. Praesent imperdiet tortor ullamcorper orci semper rhoncus. Aliquam posuere tincidunt odio, eu venenatis orci tristique vitae. Etiam non porta elit. Nullam sit amet mi nulla. Donec tincidunt nibh vel augue condimentum sollicitudin. Vestibulum ultrices quam felis, eu volutpat lorem vehicula sed. Quisque efficitur dolor arcu, nec placerat elit rutrum sit amet. Sed elementum sem condimentum dapibus sodales.
+Consider the case of compressing an image using the DCT. The main steps for this process are as follows:
 
-Proin sed tellus nec elit finibus malesuada id in diam. Donec ultrices metus eu quam dapibus eleifend. Sed facilisis tempus tortor, at elementum nisi tincidunt tincidunt. Integer sed vehicula mi. Phasellus sit amet bibendum massa. Curabitur rhoncus odio ac porta pharetra. Ut ultricies tincidunt lacinia. Donec varius suscipit dui, at molestie enim. Fusce vitae arcu in sapien feugiat tincidunt. Duis sed viverra metus.
+- Represent your image as a discrete matrix
+- Create a DCT matrix based on the size of your image matrix
+- Find the most important or characteristic frequencies (dot product)
+- To compress, remove the frequencies that are less representative of the image
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam posuere eros eu lorem semper iaculis. Sed nisi est, ornare eu luctus ac, facilisis sed lectus. In dapibus eleifend erat at tempus. Maecenas in pharetra neque, sit amet tempus urna. Mauris non nisl quis sapien pretium vestibulum. Phasellus imperdiet tellus non ante aliquet, non auctor mi ultricies. Aliquam nec neque sed ante placerat maximus vel eget velit.
+### Represent an image as a matrix:
 
-Nunc leo metus, varius id efficitur sit amet, pretium non tellus. Etiam non vehicula nulla. Sed pellentesque faucibus euismod. Phasellus mollis mollis leo vitae auctor. Ut facilisis ipsum auctor nibh vulputate, sit amet congue leo vestibulum. Etiam iaculis quis diam tincidunt eleifend. Sed vel erat non lacus facilisis pellentesque. Ut nec rutrum dolor, sit amet semper dui.
+As an example, consider the image on the left where one half is black and the other half is white. We can start by looking at the row of pixels highlighted in blue.
 
-Aliquam euismod vestibulum accumsan. Nunc imperdiet pellentesque gravida. Nulla hendrerit risus quis diam tempor tempus. Etiam in lectus odio. Duis a scelerisque lorem. Aenean in lorem a quam pellentesque finibus. Duis nec convallis elit. 
+Looking at this row, we can represent the shade of the image using numbers 0-255  for each pixel's shade.
+
+Doing this for the whole image, we create a matrix where each pixel in the image maps to a value in the matrix that represents its color. With a colored image, this matrix would have a height of 3 for each RGB value.
+
+Typically when performing the DCT an image matrix is broken up into blocks of size 8x8 to compress individually. 
+
+### Create a DCT matrix:
+
+The DCT matrix can be thought of as a matrix containing cosine functions with varying frequencies. Equation X defines the cosine function for each position i, j in the matrix. 
+
+To illustrate this matrix, consider the fifth row. Plotting the row on the left we can see that it represents a cosine function of a frequency determined by N and i. 
+
+The size N of the DCT matrix is usually 8x8 to match the size of our image matrix blocks.
+
+In the DCT matrix, higher frequency functions are in the lower right corner, whereas lower frequency functions are in the upper left corner.
+
+We will use this matrix to find how much of each cosine function is present in the image.
+
+### The transformation:
+
+
+Next, we will transform our image from the spatial domain to the frequency domain. This is done by multiplying each row of our image matrix f by our DCT matrix d. This operation can be thought of as finding how similar each row of pixels is with each cosine function. This yields a new matrix a, the same size as our original image that contains coefficients for the ‘amount’ of each vector in d for each row of pixels in our original image. This operation is also normally performed across the columns of the image blocks. (For more information on how that is done click here.)
+
+
+### Compression
+
+After representing an image block as the amount of each cosine function defined by the DCT matrix, we are left with a matrix of weights a that is the size of our blocks.
+
+To compress the image, we can perform a lossy image processing method called quantization. A quantization matrix the same size as a is created. Next, each value in a is divided by the corresponding value from the quantization matrix and rounded to the nearest integer. The values in the quantization matrix will vary depending on the desired quality and amount of compression. 
+
+With large enough divisors in the quantization matrix, many of the values of a will go to 0. These 0 values can then be discarded, reducing the size of our final matrix and therefore compressing the image. 
+
+Deciding the values in a quantization matrix is an interesting problem, and is usually determined based on human perception. To explain this, we must first understand what ‘high’ and ‘low’ frequencies mean in an image. Low frequencies can be thought of as slower changes throughout the image such as background colors and larger shapes. High frequencies represent faster changes in the image. These frequencies often represent textures and details in the image that are less noticeable to the human eye. For this reason, high frequencies are usually removed first during compression. In a quantization matrix, removing higher frequencies can be done by setting larger divisors in the lower right corner, to match where high frequencies are represented in the DCT matrix. 
+
+The highest quality compression would have a quantization matrix of all 1s, meaning all data is preserved.
+
 
 ## Example
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies mi ac luctus dapibus. Maecenas faucibus magna vel nulla pretium, nec elementum risus venenatis. Praesent fermentum consectetur suscipit. Donec varius magna tortor. Vivamus pharetra finibus ligula et accumsan. Nunc ullamcorper convallis vulputate. Praesent imperdiet tortor ullamcorper orci semper rhoncus. Aliquam posuere tincidunt odio, eu venenatis orci tristique vitae. Etiam non porta elit. Nullam sit amet mi nulla. Donec tincidunt nibh vel augue condimentum sollicitudin. Vestibulum ultrices quam felis, eu volutpat lorem vehicula sed. Quisque efficitur dolor arcu, nec placerat elit rutrum sit amet. Sed elementum sem condimentum dapibus sodales.
-
-Proin sed tellus nec elit finibus malesuada id in diam. Donec ultrices metus eu quam dapibus eleifend. Sed facilisis tempus tortor, at elementum nisi tincidunt tincidunt. Integer sed vehicula mi. Phasellus sit amet bibendum massa. Curabitur rhoncus odio ac porta pharetra. Ut ultricies tincidunt lacinia. Donec varius suscipit dui, at molestie enim. Fusce vitae arcu in sapien feugiat tincidunt. Duis sed viverra metus.
-
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam posuere eros eu lorem semper iaculis. Sed nisi est, ornare eu luctus ac, facilisis sed lectus. In dapibus eleifend erat at tempus. Maecenas in pharetra neque, sit amet tempus urna. Mauris non nisl quis sapien pretium vestibulum. Phasellus imperdiet tellus non ante aliquet, non auctor mi ultricies. Aliquam nec neque sed ante placerat maximus vel eget velit.
-
-Nunc leo metus, varius id efficitur sit amet, pretium non tellus. Etiam non vehicula nulla. Sed pellentesque faucibus euismod. Phasellus mollis mollis leo vitae auctor. Ut facilisis ipsum auctor nibh vulputate, sit amet congue leo vestibulum. Etiam iaculis quis diam tincidunt eleifend. Sed vel erat non lacus facilisis pellentesque. Ut nec rutrum dolor, sit amet semper dui.
-
-Aliquam euismod vestibulum accumsan. Nunc imperdiet pellentesque gravida. Nulla hendrerit risus quis diam tempor tempus. Etiam in lectus odio. Duis a scelerisque lorem. Aenean in lorem a quam pellentesque finibus. Duis nec convallis elit. 
-
-Nunc leo metus, varius id efficitur sit amet, pretium non tellus. Etiam non vehicula nulla. Sed pellentesque faucibus euismod. Phasellus mollis mollis leo vitae auctor. Ut facilisis ipsum auctor nibh vulputate, sit amet congue leo vestibulum. Etiam iaculis quis diam tincidunt eleifend. Sed vel erat non lacus facilisis pellentesque. Ut nec rutrum dolor, sit amet semper dui.
-
-Aliquam euismod vestibulum accumsan. Nunc imperdiet pellentesque gravida. Nulla hendrerit risus quis diam tempor tempus. Etiam in lectus odio. Duis a scelerisque lorem. Aenean in lorem a quam pellentesque finibus. Duis nec convallis elit. 

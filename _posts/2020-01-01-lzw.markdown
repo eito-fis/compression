@@ -1,63 +1,73 @@
 ---
 layout: post
 title:  "Lempel-Ziv-Welch"
-subtitle: "What you can do with it!"
+subtitle: ""
 date:   2014-08-19 23:56:45
 tag: toc
 categories: [tool]
 ---
 
-Just a sample post to show some of the *typography* elements supported from
-**daktilo** theme.
+## Context
 
-___
+If you examine a text file character by character or look at an image file pixel by pixel, you’ll probably start noticing repeating patterns. Lempel Ziv Welch (LZW), published in 1984 by Albraham Lempel, Jacob Ziv, and Terry Welch, is a lossless compression algorithm that takes advantage of recurring patterns found in data to reduce file size. The algorithm is lossless, meaning the exact original data can be reconstructed from the compressed version. It is also adaptive and updates its compression model as it processes more data, allowing compression to become more and more efficient.
 
-A blockquote:
+LZW can be applied to any file type and can be implemented in both software and hardware. Software applications of LZW include the GIF image format, TIFF image format, and Unix file compression utility compress. In the hardware world, LZW is used notably in wifi modems. 
 
-> We are Hitchhikers in the road of open source knowledge.
+LZW is also closely related to a few other common compression algorithms, namely, it’s predecessors LZ77 and LZ78, and the deflate/zlib. Deflate/zlib is a combination between a LZ77 variant and Huffman encoding, and is responsible for zip, png, pdf file types.
 
-## Header 2
+## Overview
 
-Duis lacinia commodo dui, vel aliquam metus hendrerit eu. Integer et scelerisque dui. Sed nec molestie quam. Donec sit amet nisl a massa commodo ultrices nec quis nunc. Aenean aliquet eu arcu adipiscing dignissim. Nunc dictum elit vitae dolor molestie aliquet.
+The LZW algorithm works by representing strings of symbols(substrings) with integer codes. Since the integer codes take up less space than the substrings in most scenarios, we achieve compression. LZW utilizes a code dictionary to store the integer codes and the substrings they are associated with. Rather than using a predefined dictionary like some data compression algorithms, LZW is adaptive and builds the dictionary as it processes the input data. 
 
+We start encoding at the beginning of the input and process one character (typically 8 bits) at a time. Throughout the encoding process, we will refer to and update the code dictionary and a variable that keeps track of the substring we’re currently processing. 
 
-Example code:
+If the substring we’re currently processing exists in the dictionary, the algorithm takes the next character from input. We update the current substring by adding the new character to the end and checking whether the updated substring is in the code dictionary. We continue this process of adding a new character and checking the dictionary until we find a substring that is not in the dictionary, in other words, a substring that has not been encountered before. 
 
-{% highlight javascript %}
-var light = new Light();
-var switchUp = new FlipUpCommand(light);
-var switchDown = new FlipDownCommand(light);
-var s = new Switch();
+There are several steps to take to process a substring that has not been previously seen. First, add the substring to the code dictionary. Second, take the code that corresponds to the previously seen portion of the substring, which is just the substring without the last character, and write it to the output. Finally, we set the substring we’re currently processing to its last character.
 
-s.storeAndExecute(switchUp);
-s.storeAndExecute(switchDown);
-{% endhighlight %}
+We then feed in the next character from input and continue the process described in the above two paragraphs until the input is exhausted. 
 
+Since LZW only requires a single pass of the data, it scales linearly and can be described in Big O notation as having O(n) time complexity. 
 
-A list:
+## Algorithm
 
-- Praesent nisi elit, bibendum ut consectetur ac, aliquet in nunc
-- Donec ante est, volutpat in mi et, pulvinar congue dolor.
-- Quisque ultrices pulvinar sollicitudin.
-- Duis elementum odio eu euismod suscipit.
-- Integer enim lorem, interdum sit amet consectetur non, bibendum eget neque.
+Let’s go through an example where we use LZW to compress the string “babaa”. 
 
-A numbered list:
+The first thing we need to do is to create and initialize the code dictionary. 
 
-1. Praesent nisi elit, bibendum ut consectetur ac, aliquet in nunc.
-2. Donec ante est, volutpat in mi et, pulvinar congue dolor.
-3. Quisque ultrices pulvinar sollicitudin.
-4. Duis elementum odio eu euismod suscipit.
-5. Integer enim lorem, interdum sit amet consectetur non, bibendum eget neque.
+For our dictionary, the indexes are the codes and the values at each index are the substrings. The dictionary typically holds a max of 4096 entries to ensure the LZW algorithm doesn’t use up too much memory. Additionally, the first 256 entries of the dictionary are preassigned to represent single byte ASCII characters (e.g. ‘j’, ‘a’, etc.), and serve as “base cases” to get the algorithm started. Each character takes up 8 bits and each code takes up 12 bits.
 
-Definition list:
+Before we jump into processing the input, it’s worth mentioning this quick note about diagramming:
 
-Curabitur cursus magna eu sem cursus
-: ac ultrices urna pharetra.
-: Duis scelerisque ipsum eu luctus elementum.
+The purple highlight signifies that these characters have been processed with LZW and are present in the output. The pink highlight indicates the substring that is currently being processed. Characters that are not highlighted have not been fed into the algorithm. 
 
-Pellentesque habitant morbi tristique senectus
-: Curabitur malesuada lacus ac gravida porttitor
-: Duis sodales feugiat lorem et mollis.
+Alright, let's get started with encoding the string “babaa”
 
-Want to suggest something? Please [Send me a request](https://github.com/kronik3r/daktilo/issues/new).
+We start at the beginning of the string and set the current substring to “b”. Since b exists in the dictionary, we feed in another character from input. 
+
+The current substring is “ba”. Since “ba” does not exist in the dictionary, we add it to the dictionary so that it corresponds to the next available code. 
+
+We then take “b”, the longest section of “ba” that exists in the dictionary, and write the code associated with it to output. We also set the current substring to “a”, the last character of “ba”, and feed in another character. 
+
+The current substring becomes “ab”. Since “ab” does not exist in the dictionary, similar as before, we add it to the dictionary to the next available code. 
+
+We take “a”, the longest section of “ab” that’s in the dictionary, and write its code to output. We then set the current substring to “b”, the last character of “ab”, and feed in the next character from input. 
+
+The current substring is “ba”. Since “ba” exists in the dictionary, we feed in another character from input. 
+
+The current substring updates to “baa”. Since “baa” does not exist in the dictionary, we add it to the dictionary to the next available code. 
+
+We take “ba”, the longest section of “baa” that’s in the dictionary, and write its code to output. We also set the current substring to “a”, the last character of “baa”. Note that we’ve exhausted our input.
+
+Since there are no more characters left from input to feed in, we simply output the code of “a” to finish encoding. 
+
+So did this process compress “babaa”? Let’s do some math: 
+
+- We started with a 5 character input and each character takes up 8 bits, giving us 5\*8 = 40 bits of input.
+- We ended up with a 4 code output and each code takes up 12 bits, giving us 4\*12 = 48 bits of output. 
+
+Our findings show that the encoded output actually takes more space than the input for “babaa”! You may be wondering, if this process is meant to reduce memory, why didn’t it work? LZW couldn’t compress “babaa” because although the string contained repetition, it was too short for LZW to build a effective dictionary model. Since LZW capitalizes on patterns and updates its model as it goes, it works best on large repetitive files like text or image. As the substrings that get added to the dictionary get progressively longer, LZW yields better compression rates. 
+
+## Example
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies mi ac luctus dapibus. Maecenas faucibus magna vel nulla pretium, nec elementum risus venenatis. Praesent fermentum consectetur suscipit. Donec varius magna tortor. Vivamus pharetra finibus ligula et accumsan. Nunc ullamcorper convallis vulputate. Praesent imperdiet tortor ullamcorper orci semper rhoncus. Aliquam posuere tincidunt odio, eu venenatis orci tristique vitae. Etiam non porta elit. Nullam sit amet mi nulla. Donec tincidunt nibh vel augue condimentum sollicitudin. Vestibulum ultrices quam felis, eu volutpat lorem vehicula sed. Quisque efficitur dolor arcu, nec placerat elit rutrum sit amet. Sed elementum sem condimentum dapibus sodales.
