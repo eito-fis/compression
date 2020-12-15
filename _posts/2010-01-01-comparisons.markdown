@@ -1,0 +1,19 @@
+---
+layout: post
+title: 
+subtitle: 
+date:   2020-12-15
+categories: []
+---
+
+Every second of our lives we are absorbing and processing information. It surrounds and defines us. It is critical to the way our world functions, and we are constantly transmitting it. However, information transmission has limits. With our current methods of communication we can only send and process so much information at once. We can address our channel limitations, but it is often more effective to simply reduce the amount of information you need to send. This is called compression. 
+
+From the movie you’re watching on Netflix to the song you just played on Spotify, almost every digital medium we interact with has been compressed. The files that we interact with are often fractions of the original size, requiring less hardware space and allowing for quick transmission times. 
+
+Without compression, the fast-paced interconnected world we know today could not exist.
+
+However, the methodology for compression is often overlooked. In this project, we will explore three basic compression methods that serve as the building blocks for modern day compression standards:
+
+- [**The Discrete Cosine Transform (DCT)**]({{ site.posts[1].url | prepend: site.baseurl }}){: .underline--magical }, which is a transformation widely used in signal processing (similar to the DFT from QEA) and image compression. 
+- [**Lempel Ziv Welch (LZW)**]({{ site.posts[2].url | prepend: site.baseurl }}){: .underline--magical }, which is an adaptive and lossless compression algorithm that is commonly used in GIF and TIFF. 
+- [**Arithmetic Coding**]({{ site.posts[3].url | prepend: site.baseurl }}){: .underline--magical }, which is a lossless compression algorithm that is similar to Huffman coding, and nears the theoretical limits of lossless compression. 
