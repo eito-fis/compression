@@ -25,7 +25,9 @@ If the substring we’re currently processing exists in the dictionary, the algo
 
 There are several steps to take to process a substring that has not been previously seen. First, add the substring to the code dictionary. Second, take the code that corresponds to the previously seen portion of the substring, which is just the substring without the last character, and write it to the output. Finally, we set the substring we’re currently processing to its last character.
 
-We then feed in the next character from input and continue the process described in the above two paragraphs until the input is exhausted. 
+We then feed in the next character from input and continue the process described in the above two paragraphs until the input is exhausted. A block diagram of the algorithm is shown below.
+
+![lzw flowchart]({{"/assets/images/LZW/flowchart.png" | prepend: site.baseurl }})
 
 Since LZW only requires a single pass of the data, it scales linearly and can be described in Big O notation as having O(n) time complexity. 
 
