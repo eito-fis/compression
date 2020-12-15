@@ -27,7 +27,7 @@ There are several steps to take to process a substring that has not been previou
 
 We then feed in the next character from input and continue the process described in the above two paragraphs until the input is exhausted. A block diagram of the algorithm is shown below.
 
-![lzw flowchart](/assets/images/LZW/flowchart.png)
+![lzw flowchart]({{"/assets/images/LZW/flowchart.png" | prepend: site.baseurl }})
 
 Since LZW only requires a single pass of the data, it scales linearly and can be described in Big O notation as having O(n) time complexity. 
 
