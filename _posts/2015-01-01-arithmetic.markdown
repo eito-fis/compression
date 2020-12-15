@@ -15,6 +15,8 @@ When compressing data we care about representing symbols efficiently that appear
 
 Arithmetic coding is a form of lossless compression that takes a string of input symbols and encodes it as a single high precision floating point number. The core idea of the algorithms is rooted in the properties of intervals that make up a portion of a larger number line. Imagine we have an interval that takes up half of the number line that it sits on. We can “zoom in” on this interval, creating a new number line that is half the length of the original number line. Notice then that we can define the same interval, this time relative to the new, smaller number line. In fact, we can repeat this process of starting with a number line and then zooming in on a specific proportion as many times as we want! Just with smaller and smaller numbers lines at every step. Arithmetic coding takes this principle and applies it to compression - read the next section to find out how.
 
+![ac line]({{"/assets/images/AC/overview.png" | prepend: site.baseurl }}){: style="height:200px;"}
+
 ## Algorithm
 
 To start, we must define a statistical model that tells us how likely each symbol we encounter is. This model does not have to be good for the algorithm to be able to encode the information, but the better it is the closer to optimal the compression will be. Understanding why this is true is better saved for after understanding the algorithm. For now, the model simply assigns a probability to each possible symbol, with the probabilities of all symbols summing up to one. For this walkthrough, we define a simple model where ‘A’ has a probability of 0.5, ‘B’ has a probability of 0.3 and ‘C’ has a probability of 0.2.
