@@ -89,34 +89,37 @@ To decode the image, the matrix a is first reconstructed by reversing the encodi
 
 Code used for these examples was adapted from https://github.com/gabrielchristo/image-compression
 
-![original im]({{"/assets/images/DCT/yuzu.png" | prepend: site.baseurl }})
+Original Image
 
-Original Size: 14,771,491 bytes
+![original im]({{"/assets/images/DCT/yuzu.png" | prepend: site.baseurl }}){: style="height: 500px"}
 
-![original im]({{"/assets/images/DCT/out_5.png" | prepend: site.baseurl }})
+- Original Size: 14,771,491 bytes
 
-Compressed Size: 3,278,353 bytes
-Compression Ratio: 3.37
-(original/compressed)
-Size of image was significantly reduced, yet quality remains comparable
 
-![original im]({{"/assets/images/DCT/out_10.png" | prepend: site.baseurl }})
+![original im]({{"/assets/images/DCT/out_5.png" | prepend: site.baseurl }}){: style="height: 500px"}
 
-Compressed Size: 2,758,764 bytes
-Compression Ratio: 4.01
-Starting to see reduced quality
+- Compressed Size: 3,278,353 bytes
+- Compression Ratio: 3.37
+- (original/compressed)
+- Size of image was significantly reduced, yet quality remains comparable
 
-![original im]({{"/assets/images/DCT/out_15.png" | prepend: site.baseurl }})
+![original im]({{"/assets/images/DCT/out_10.png" | prepend: site.baseurl }}){: style="height: 500px"}
 
-Compressed Size: 2,492,274 bytes
-Compression Ratio: 4.44
-Significant reduction in quality. You can see small blocks forming that are artifacts from the DCT 8x8 blocking.
+- Compressed Size: 2,758,764 bytes
+- Compression Ratio: 4.01
+- Starting to see reduced quality
 
-![original im]({{"/assets/images/DCT/out_50.png" | prepend: site.baseurl }})
+![original im]({{"/assets/images/DCT/out_15.png" | prepend: site.baseurl }}){: style="height: 500px"}
 
-Compressed Size: 1,723,169 bytes
-Compression Ratio: 6.42
-High frequency values that correspond to textures and details have been heavily reduced. The image appears smooth from the remaining lower frequencies.
+- Compressed Size: 2,492,274 bytes
+- Compression Ratio: 4.44
+- Significant reduction in quality. You can see small blocks forming that are artifacts from the DCT 8x8 blocking.
+
+![original im]({{"/assets/images/DCT/out_50.png" | prepend: site.baseurl }}){: style="height: 500px"}
+
+- Compressed Size: 1,723,169 bytes
+- Compression Ratio: 6.42
+- High frequency values that correspond to textures and details have been heavily reduced. The image appears smooth from the remaining lower frequencies.
 
 
 
