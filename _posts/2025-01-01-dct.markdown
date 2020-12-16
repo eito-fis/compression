@@ -24,29 +24,33 @@ Consider the case of compressing an image using the DCT. The main steps for this
 - Find the most important or characteristic frequencies (dot product)
 - To compress, remove the frequencies that are less representative of the image
 
+![diagram overview]({{"/assets/images/DCT/overview.png" | prepend: site.baseurl }})
+
 ### Represent an image as a matrix:
 
 ![image to matrix]({{"/assets/images/DCT/image_to_matrix.png" | prepend: site.baseurl }}){: style="width:280px; float:left; margin:60px 40px"}
 
 As an example, consider the image to the left where one half is black and the other half is white. We can start by looking at the row of pixels highlighted in blue.
 
-Looking at this row, we can represent the shade of the image using numbers 0-255  for each pixel's shade.
+Looking at this row, we can represent the shade of the image using numbers 0-255  for each pixel's shade. 
 
-Doing this for the whole image, we create a matrix where each pixel in the image maps to a value in the matrix that represents its color. With a colored image, this matrix would have a height of 3 for each RGB value. 
+Doing this for the whole image, we create a matrix where each pixel in the image maps to a value in the matrix that represents its shade. With a colored image, this matrix would have a height of 3 for each RGB value. 
  
-Typically when performing the DCT an image matrix is broken up into blocks of size 8x8 to compress individually.
+![blocking image]({{"/assets/images/DCT/blocking.png" | prepend: site.baseurl }}){: style="width:280px; float:left; margin:60px 40px"}
+
+Typically when performing the DCT an image matrix is broken up into blocks of size 8x8 to compress individually. For example, if the image from above was 64x64 it would be broken up into the following blocks where each block is it’s own matrix. Each block will be processed separately then reassembled to create the image.
 
 ### Create a DCT matrix:
 
 ![dct equation]({{"/assets/images/DCT/equation.png" | prepend: site.baseurl }}){: style="width:280px; float:left; margin: 40px"}
 
-The DCT matrix can be thought of as a matrix containing cosine functions with varying frequencies. Equation X defines the cosine function for each position i, j in the matrix. 
+The DCT matrix can be thought of as a matrix containing cosine functions with varying frequencies. Equation X defines the cosine value for each position i, j in the matrix, where N is the length of the matrix. Each row of the DCT matrix represents a cosine function of a given frequency determined by i and N. Within rows, each element defines the value of that function at a specific position j.
 
-To illustrate this matrix, consider the fifth row. Plotting the row on the left we can see that it represents a cosine function of a frequency determined by N and i. 
+To illustrate this matrix, consider the fifth row (cos(pi/N * 5 * (j + ½)). Plotting the row when N = 8 with changing j, we can see that it represents a cosine function of a frequency determined by N and i. 
 
 ![cos wave]({{"/assets/images/DCT/cos.png" | prepend: site.baseurl }})
 
-The size N of the DCT matrix is usually 8x8 to match the size of our image matrix blocks.
+The size N of the DCT matrix is usually 8x8 (i, j =8) to match the size of our image matrix blocks.
 
 In the DCT matrix, higher frequency functions are in the lower right corner, whereas lower frequency functions are in the upper left corner.
 
@@ -56,7 +60,7 @@ We will use this matrix to find how much of each cosine function is present in t
 
 ### The transformation:
 
-Next, we will transform our image from the spatial domain to the frequency domain. This is done by multiplying each row of our image matrix f by our DCT matrix d. This operation can be thought of as finding how similar each row of pixels is with each cosine function. This yields a new matrix a, the same size as our original image that contains coefficients for the ‘amount’ of each vector in d for each row of pixels in our original image. This operation is also normally performed across the columns of the image blocks. (For more information on how that is done click here.)
+Next, we will transform our image from the spatial domain to the frequency domain. This is done by multiplying each row of our image matrix f by our DCT matrix d. This operation can be thought of as finding how similar each row of pixels is with each cosine function. This yields a new matrix a, the same size as our original image that contains coefficients for the ‘amount’ of each vector in d for each row of pixels in our original image. This operation is also normally performed across the columns of the image blocks. 
 
 ![dct multiplication]({{"/assets/images/DCT/mult.png" | prepend: site.baseurl }}){: style="height: 300px; margin-left: 5%"}
 
@@ -66,15 +70,58 @@ Next, we will transform our image from the spatial domain to the frequency domai
 
 After representing an image block as the amount of each cosine function defined by the DCT matrix, we are left with a matrix of weights a that is the size of our blocks.
 
-To compress the image, we can perform a lossy image processing method called quantization. A quantization matrix the same size as a is created. Next, each value in a is divided by the corresponding value from the quantization matrix and rounded to the nearest integer. The values in the quantization matrix will vary depending on the desired quality and amount of compression. 
-
-With large enough divisors in the quantization matrix, many of the values of a will go to 0. These 0 values can then be discarded, reducing the size of our final matrix and therefore compressing the image. 
+To compress the image, we can perform a lossy image processing method called quantization. A quantization matrix the same size as a is created (explained further down). Next, each value in a is divided by the corresponding value from the quantization matrix and rounded to the nearest integer. The values in the quantization matrix will vary depending on the desired quality and amount of compression.
 
 Deciding the values in a quantization matrix is an interesting problem, and is usually determined based on human perception. To explain this, we must first understand what ‘high’ and ‘low’ frequencies mean in an image. Low frequencies can be thought of as slower changes throughout the image such as background colors and larger shapes. High frequencies represent faster changes in the image. These frequencies often represent textures and details in the image that are less noticeable to the human eye. For this reason, high frequencies are usually removed first during compression. In a quantization matrix, removing higher frequencies can be done by setting larger divisors in the lower right corner, to match where high frequencies are represented in the DCT matrix. 
 
+![quantization diagram]({{"/assets/images/DCT/quantization.png" | prepend: site.baseurl }}){: style="height: 300px; margin-left: 5%"}
+
 The highest quality compression would have a quantization matrix of all 1s, meaning all data is preserved.
 
+With large enough divisors in the quantization matrix, many of the values of a will go to 0. Most often the 0s are grouped in the bottom right. At this point the data is ready to be encoded for transmission. There are many ways to do this, but their explanations would require their own page. In essence, the encoding methods take advantage of the large amount of repeating 0s in a. They do this by encoding the nonzero values, then using 1 value to specify that the rest are equal to 0. This significantly reduces the amount of information needed to represent the image, thus compressing it.
 
-## Example
+### Decoding
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies mi ac luctus dapibus. Maecenas faucibus magna vel nulla pretium, nec elementum risus venenatis. Praesent fermentum consectetur suscipit. Donec varius magna tortor. Vivamus pharetra finibus ligula et accumsan. Nunc ullamcorper convallis vulputate. Praesent imperdiet tortor ullamcorper orci semper rhoncus. Aliquam posuere tincidunt odio, eu venenatis orci tristique vitae. Etiam non porta elit. Nullam sit amet mi nulla. Donec tincidunt nibh vel augue condimentum sollicitudin. Vestibulum ultrices quam felis, eu volutpat lorem vehicula sed. Quisque efficitur dolor arcu, nec placerat elit rutrum sit amet. Sed elementum sem condimentum dapibus sodales.
+To decode the image, the matrix a is first reconstructed by reversing the encoding method used. Then, the quantization matrix operation is undone by multiplying a by each value of the original quantization matrix. Lastly, an inverse DCT transformation is performed. To do this, we can simply multiply our matrix of weights a by the inverse of our original DCT matrix. This reconstructs our original image matrix, and we can then visualize it.
+
+
+## Examples
+
+Code used for these examples was adapted from https://github.com/gabrielchristo/image-compression
+
+Original Image
+
+![original im]({{"/assets/images/DCT/yuzu.png" | prepend: site.baseurl }}){: style="height: 500px"}
+
+- Original Size: 14,771,491 bytes
+
+
+![original im]({{"/assets/images/DCT/out_5.png" | prepend: site.baseurl }}){: style="height: 500px"}
+
+- Compressed Size: 3,278,353 bytes
+- Compression Ratio: 3.37
+- (original/compressed)
+- Size of image was significantly reduced, yet quality remains comparable
+
+![original im]({{"/assets/images/DCT/out_10.png" | prepend: site.baseurl }}){: style="height: 500px"}
+
+- Compressed Size: 2,758,764 bytes
+- Compression Ratio: 4.01
+- Starting to see reduced quality
+
+![original im]({{"/assets/images/DCT/out_15.png" | prepend: site.baseurl }}){: style="height: 500px"}
+
+- Compressed Size: 2,492,274 bytes
+- Compression Ratio: 4.44
+- Significant reduction in quality. You can see small blocks forming that are artifacts from the DCT 8x8 blocking.
+
+![original im]({{"/assets/images/DCT/out_50.png" | prepend: site.baseurl }}){: style="height: 500px"}
+
+- Compressed Size: 1,723,169 bytes
+- Compression Ratio: 6.42
+- High frequency values that correspond to textures and details have been heavily reduced. The image appears smooth from the remaining lower frequencies.
+
+
+
+
+
