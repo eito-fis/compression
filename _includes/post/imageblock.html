@@ -1,0 +1,9 @@
+<div class="image_block">
+	<img class="image_block_image" src="{{ include.url | prepend: site.baseurl}}" alt="{{ include.name }}">
+	{% assign lines = {{include.content}} | split: "|" %}
+	<div class="image_block_text">
+	{% for line in lines %}
+		<p class="image_block_p">{{ line }}</p>
+	{% endfor %}
+	</div>
+</div>

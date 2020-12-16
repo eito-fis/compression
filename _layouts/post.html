@@ -7,19 +7,19 @@ layout: default
     {{ content }}
 	{% assign psize = page.tags | size %}
 	{% if psize != 0 %} 
-	<div class="navwrap">
-	    <nav class="navbar" id="nav">
-	        <ul>
-	    	    <li><a href="#context">Context</a></li>
-	    	    <li><a href="#overview">Overview</a></li>
-	    	    <li><a href="#algorithm">Algorithm</a></li>
-	    	    <li><a href="#example">Example</a></li>
-	        </ul>
-	    </nav>
-	</div>
-	<div id="{{ '/' | prepend: site.baseurl }}"></div>
-	{% endif %}
+        <div class="navwrap">
+            <nav class="navbar" id="nav">
+        	<ul>
+                    <li><a href="#context">Context</a></li>
+        	    <li><a href="#overview">Overview</a></li>
+		    <li><a href="#algorithm">Algorithm</a></li>
+		    {% if page.tags contains "examples" %}
+        	    <li><a href="#examples">Examples</a></li>
+		    {% endif %}
+        	</ul>
+            </nav>
+        </div>
+{% endif %}
 </div>
-
 
 {% include post/about.html %}

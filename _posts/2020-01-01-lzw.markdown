@@ -4,7 +4,6 @@ title:  "Lempel-Ziv-Welch"
 subtitle: ""
 date:   2014-08-19 23:56:45
 tag: toc
-categories: [tool]
 ---
 
 ## Context
@@ -113,7 +112,3 @@ So did this process compress “babaa”? Let’s do some math:
 - We ended up with a 4 code output and each code takes up 12 bits, giving us 4\*12 = 48 bits of output. 
 
 Our findings show that the encoded output actually takes more space than the input for “babaa”! You may be wondering, if this process is meant to reduce memory, why didn’t it work? LZW couldn’t compress “babaa” because although the string contained repetition, it was too short for LZW to build a effective dictionary model. Since LZW capitalizes on patterns and updates its model as it goes, it works best on large repetitive files like text or image. As the substrings that get added to the dictionary get progressively longer, LZW yields better compression rates. 
-
-## Example
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies mi ac luctus dapibus. Maecenas faucibus magna vel nulla pretium, nec elementum risus venenatis. Praesent fermentum consectetur suscipit. Donec varius magna tortor. Vivamus pharetra finibus ligula et accumsan. Nunc ullamcorper convallis vulputate. Praesent imperdiet tortor ullamcorper orci semper rhoncus. Aliquam posuere tincidunt odio, eu venenatis orci tristique vitae. Etiam non porta elit. Nullam sit amet mi nulla. Donec tincidunt nibh vel augue condimentum sollicitudin. Vestibulum ultrices quam felis, eu volutpat lorem vehicula sed. Quisque efficitur dolor arcu, nec placerat elit rutrum sit amet. Sed elementum sem condimentum dapibus sodales.
