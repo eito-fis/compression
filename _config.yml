@@ -1,19 +1,15 @@
 # Site settings
 title: Discrete-2020
 description: >
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Our discrete 2020 fall semester final project on the topic of exploring compression algorithms.
+  We cover Discrete Cosine Transform, Lempel-Ziv-Welch and Arithmetic Coding.
 
 baseurl: "/compression" # the subpath of your site, e.g. /blog/
 url: "https://eito-fis.github.io" # the base hostname & protocol for your site
 
 author:
-  fullname: Motaquillah Maddane
-  googleplus: https://www.google.com/+MotaquillahMaddane
-  github: kronik3r
-  twitter: electrik_frog
-  # disqus: your_disqus_username
+  fullname: Eamon Ito-Fisher
+  github: eito-fis
 
 # google_analytics: 'UA-XXXXXXXX-X'
 

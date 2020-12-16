@@ -1,19 +1,19 @@
 <div class="about">
     <div class="about__return">
 	<div class="about__nav">
-            <a class="about__arrow hover_link" href="{{page.next.url | prepend: site.baseurl}}">
+            <a class="about__arrow hover_link scroll_top" href="{{page.next.url | prepend: site.baseurl}}">
 	        {% if page.next.url %}
 		&laquo; <span class="hide_mobile">{{page.next.title}} </span>
 	        {% endif %}
 	    </a>
 	</div>
 	<div class="about__center">
-	    <a class="hover_link" href="{{ '/' | prepend: site.baseurl }}">
+	    <a class="hover_link scroll_top" href="{{ '/' | prepend: site.baseurl }}">
                 Home
 	    </a>
 	</div>
 	<div class="about__nav next">
-	    <a class="about__arrow hover_link" href="{{page.previous.url | prepend: site.baseurl}}">
+	    <a class="about__arrow hover_link scroll_top" href="{{page.previous.url | prepend: site.baseurl}}">
                     {% if page.previous.url %}
 		        <span class="hide_mobile">{{page.previous.title}}</span> &raquo;
     	            {% endif %}

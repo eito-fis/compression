@@ -8,11 +8,11 @@ tag: toc
 
 ## Context
 
-When compressing data we care about representing symbols efficiently that appear frequently much more than symbols that appear rarely. Arithmetic coding, much like Huffman coding, is built on this intuition. It was designed concurrently by Jorma J. Rissanen, a researcher at IBM, and Richard C. Pasco, a PhD student at Stanford, in 1976, then patented by IBM later that year.  This led to some compression software, like bzip2, and some standards, like the JPEG standard, to choose Huffman coding instead - despite arithmetic coding being theoretically more efficient.
+When compressing data, it makes sense that we would want symbols which appear frequently to be represented efficiently. Arithmetic coding, much like Huffman coding, is built on this intuition. It was designed concurrently by Jorma J. Rissanen, a researcher at IBM, and Richard C. Pasco, a PhD student at Stanford, in 1976, then patented by IBM later that year.  This led to some compression software, like bzip2, and some standards, like the JPEG standard, to choose Huffman coding instead - despite arithmetic coding being theoretically more efficient.
 
 ## Overview
 
-Arithmetic coding is a form of lossless compression that takes a string of input symbols and encodes it as a single high precision floating point number. The core idea of the algorithms is rooted in the properties of intervals that make up a portion of a larger number line. Imagine we have an interval that takes up half of the number line that it sits on. We can “zoom in” on this interval, creating a new number line that is half the length of the original number line. Notice then that we can define the same interval, this time relative to the new, smaller number line. In fact, we can repeat this process of starting with a number line and then zooming in on a specific proportion as many times as we want! Just with smaller and smaller numbers lines at every step. Arithmetic coding takes this principle and applies it to compression - read the next section to find out how.
+Arithmetic coding is a form of lossless compression that takes a string of input symbols and encodes it as a single high precision floating point number. As it is lossless, we can perfectly recover the original input from the compressed output. The core idea of the algorithms is rooted in the properties of intervals that make up a portion of a larger number line. Imagine we have an interval that takes up half of the number line that it sits on. We can “zoom in” on this interval, creating a new number line that is half the length of the original number line. Notice then that we can define the same interval, this time relative to the new, smaller number line. In fact, we can repeat this process of starting with a number line and then zooming in on a specific proportion as many times as we want! Just with smaller and smaller numbers lines at every step. Arithmetic coding takes this principle and applies it to compression - read the next section to find out how.
 
 ![ac line]({{"/assets/images/AC/overview.png" | prepend: site.baseurl }}){: style="width:90%;"}
 
@@ -22,7 +22,7 @@ To start, we must define a statistical model that tells us how likely each symbo
 
 ![ac model]({{"/assets/images/AC/model.png" | prepend: site.baseurl }}){: style="width:70%;"}
 
-Once we have a model we can start on the algorithm. The first step is to utilize our model to map each symbol to a range to a proportion of the number line from 0 to 1. How we do this mapping is arbitrary, as long as the range that the symbol occupies on the number line is equal to its probability under our model. However, the simplest mapping is simply starting from your largest probability and filling in the number line from the left. 
+Once we have a model we can start on the algorithm. The first step is to utilize our model to map each symbol to a proportion of the number line from 0 to 1. How we do this mapping is arbitrary, as long as the range that the symbol occupies on the number line is equal to its probability under our model. However, the simplest mapping is simply starting from your largest probability and filling in the number line from the left. 
 
 ![ac line]({{"/assets/images/AC/line.png" | prepend: site.baseurl }}){: style="width:90%;"}
 
@@ -36,11 +36,11 @@ Our new range is 0.25 - 0.4, and we can once again subdivide our new range into 
 
 ![ac encode aba]({{"/assets/images/AC/ABA.png" | prepend: site.baseurl }})
 
-Notice that at each step, our encoded range is within our initial range - our final range of 0.25 - 0.325 is within our first encoded range of 0 - 0.5. And, this is always true! As we are simply “zooming in” on our range at each step, we never step outside the ranges that we have already encoded. This makes decoding trivial.
+Notice that at each step, our encoded range is within our initial range - our final range of 0.25 - 0.325 is within our first encoded range of 0 - 0.5. And, this is always true! As we are simply “zooming in” on our range at each step, we never step outside the ranges that we have already encoded.
 
 ![ac encode decoding done]({{"/assets/images/AC/decoding_done.png" | prepend: site.baseurl }})
 
-We simply repeat the steps we took while encoding with small changes. Our initial range is once again 0 - 1. We subdivide the range using our model, but now look at which range our encoded value falls into. In our example, we see that 0.3 falls into the range 0 - 0.5. Now, due to the aforementioned property where our value can never stray outside of our initial range, we know that the first step in our encoding must have been selecting the range 0 - 0.5. So, we also know that the first symbol was A.
+This makes decoding trivial. We simply repeat the steps we took while encoding with small changes. Our initial range is once again 0 - 1. We subdivide the range using our model, but now look at which range our encoded value falls into. In our example, we see that 0.3 falls into the range 0 - 0.5. Now, due to the aforementioned property where our value can never stray outside of our initial range, we know that the first step in our encoding must have been selecting the range 0 - 0.5. So, we also know that the first symbol was A.
 
 ![ac decode a]({{"/assets/images/AC/A_decode.png" | prepend: site.baseurl }})
 
