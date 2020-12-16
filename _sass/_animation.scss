@@ -1,0 +1,44 @@
+#fader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	pointer-events: none;
+	background: $dorian;
+	-webkit-animation-duration: 125ms;
+					animation-duration: 125ms;
+	-webkit-animation-timing-function: ease-in-out;
+					animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes fade-out {
+	from { opacity: 1 }
+	to { opacity: 0 }
+}
+
+@-webkit-keyframes fade-in {
+	from { opacity: 0 }
+	to { opacity: 1 }
+}
+
+@keyframes fade-out {
+	from { opacity: 1 }
+	to { opacity: 0 }
+}
+
+@keyframes fade-in {
+	from { opacity: 0 }
+	to { opacity: 1 }
+}
+
+#fader.fade-out {
+	opacity: 0;
+	animation-name: fade-out;
+}
+
+#fader.fade-in {
+	opacity: 1;
+	animation-name: fade-in;
+}

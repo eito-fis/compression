@@ -9,9 +9,12 @@
 
     <body>
         <div class="wrapper">
+						<svg id="fader"></svg>
+						<script>
+							fadeInPage();
+						</script>
             {% include header.html %}
-
-            {{ content }}
+						{{ content }}
         </div>
 
         {% include externals/scripting.html %}

@@ -7,44 +7,44 @@ layout: default
     {{ content }}
 	{% assign psize = page.tags | size %}
 	{% if psize != 0 %} 
-        <div class="navwrap">
-	    <nav class="navbar parent_navbar">
-        	<ul>
-		    {% capture ptags %}
-		        {% assign ttags = page.tags | join: "|" %}
-			{{ttags}}
-		    {% endcapture %}
-		    {% if page.title == "Overview" %}
-                        <li class="active"><a href="{{ site.posts[0].url | prepend: site.baseurl }}">Overview</a></li>
-		    {% else %}
-                        <li><a href="{{ site.posts[0].url | prepend: site.baseurl }}">Overview</a></li>
-		    {% endif %}
-		    {% if page.title == "Discrete Cosine Transform" %}
-                        <li class="active"><a href="{{ site.posts[1].url | prepend: site.baseurl }}">DCT</a></li>
-		        {% include post/navbar.html tags=ptags %}
-		    {% else %}
-                        <li><a href="{{ site.posts[1].url | prepend: site.baseurl }}">DCT</a></li>
-		    {% endif %}
-		    {% if page.title == "Lempel-Ziv-Welch" %}
-        	        <li class="active"><a href="{{ site.posts[2].url | prepend: site.baseurl }}">LZW</a></li>
-		        {% include post/navbar.html tags=ptags %}
-		    {% else %}
-        	        <li><a href="{{ site.posts[2].url | prepend: site.baseurl }}">LZW</a></li>
-		    {% endif %}
-		    {% if page.title == "Arithmetic Coding" %}
-		        <li class="active"><a href="{{ site.posts[3].url | prepend: site.baseurl }}">AC</a></li>
-		        {% include post/navbar.html tags=ptags %}
-		    {% else %}
-		        <li><a href="{{ site.posts[3].url | prepend: site.baseurl }}">AC</a></li>
-		    {% endif %}
-		    {% if page.title == "Comparisons" %}
-                        <li class="active"><a href="{{ site.posts[4].url | prepend: site.baseurl }}">Compare</a></li>
-		    {% else %}
-                        <li><a href="{{ site.posts[4].url | prepend: site.baseurl }}">Compare</a></li>
-		    {% endif %}
-        	</ul>
-	    </nav>
-        </div>
+			<div class="navwrap">
+				<nav class="navbar parent_navbar">
+					<ul>
+						{% capture ptags %}
+								{% assign ttags = page.tags | join: "|" %}
+								{{ttags}}
+						{% endcapture %}
+						{% if page.title == "Overview" %}
+							<li class="active"><a class="scroll_top" href="#">Overview</a></li>
+						{% else %}
+							<li><a class="scroll_top" href="{{ site.posts[0].url | prepend: site.baseurl }}">Overview</a></li>
+						{% endif %}
+						{% if page.title == "Discrete Cosine Transform" %}
+							<li class="active"><a class="scroll_top" href="#">DCT</a></li>
+							{% include post/navbar.html tags=ptags %}
+						{% else %}
+							<li><a class="scroll_top" href="{{ site.posts[1].url | prepend: site.baseurl }}">DCT</a></li>
+						{% endif %}
+						{% if page.title == "Lempel-Ziv-Welch" %}
+							<li class="active"><a class="scroll_top" href="#">LZW</a></li>
+							{% include post/navbar.html tags=ptags %}
+						{% else %}
+							<li><a class="scroll_top" href="{{ site.posts[2].url | prepend: site.baseurl }}">LZW</a></li>
+						{% endif %}
+						{% if page.title == "Arithmetic Coding" %}
+							<li class="active"><a class="scroll_top" href="#">AC</a></li>
+							{% include post/navbar.html tags=ptags %}
+						{% else %}
+							<li><a class="scroll_top" href="{{ site.posts[3].url | prepend: site.baseurl }}">AC</a></li>
+						{% endif %}
+						{% if page.title == "Comparisons" %}
+							<li class="active"><a class="scroll_top" href="#">Comparisons</a></li>
+						{% else %}
+							<li><a class="scroll_top" href="{{ site.posts[4].url | prepend: site.baseurl }}">Comparisons</a></li>
+						{% endif %}
+					</ul>
+				</nav>
+			</div>
 {% endif %}
 </div>
 
