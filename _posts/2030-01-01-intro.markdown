@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Overview"
-subtitle: "Why Compression?"
+subtitle: ""
 date:   2020-12-12
-categories: []
+tags: [toc]
 ---
 
 Every second of our lives we are absorbing and processing information. It surrounds and defines us. It is critical to the way our world functions, and we are constantly transmitting it. However, information transmission has limits. With our current methods of communication we can only send and process so much information at once. We can address our channel limitations, but it is often more effective to simply reduce the amount of information you need to send. This is called compression. 

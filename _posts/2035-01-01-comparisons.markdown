@@ -3,14 +3,14 @@ layout: post
 title: Comparisons
 subtitle: 
 date: 2010-1-1
-categories: []
+tags: [toc]
 ---
 
 Discrete Cosine Transform (DCT), Lempel-Ziv-Welch (LZW), and arithmetic encoding each work best for different kinds of data. We compare these three algorithms by looking at the amount of compression each algorithm achieves for the following image, which is comprised of 11,059,200 bytes, or 88,473,600 bits.
 
 ![original im]({{"/assets/images/DCT/yuzu.png" | prepend: site.baseurl }}){: style="height: 500px"}
 
-- [**The Discrete Cosine Transform (DCT)**]({{ site.posts[1].url | prepend: site.baseurl }}){: .underline--magical }
+- [**Discrete Cosine Transform (DCT)**]({{ site.posts[1].url | prepend: site.baseurl }}){: .underline--magical }
 
 	Works well for: Images and signals. As DCT is a lossy compression algorithm, we can choose how much compression we want. In this case, we used the standard JPEG compression rate. To see how different compression rates affect the image quality, see the DCT page.
 

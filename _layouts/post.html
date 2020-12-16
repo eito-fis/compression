@@ -8,16 +8,42 @@ layout: default
 	{% assign psize = page.tags | size %}
 	{% if psize != 0 %} 
         <div class="navwrap">
-            <nav class="navbar" id="nav">
+	    <nav class="navbar parent_navbar">
         	<ul>
-                    <li><a href="#context">Context</a></li>
-        	    <li><a href="#overview">Overview</a></li>
-		    <li><a href="#algorithm">Algorithm</a></li>
-		    {% if page.tags contains "examples" %}
-        	    <li><a href="#examples">Examples</a></li>
+		    {% capture ptags %}
+		        {% assign ttags = page.tags | join: "|" %}
+			{{ttags}}
+		    {% endcapture %}
+		    {% if page.title == "Overview" %}
+                        <li class="active"><a href="{{ site.posts[0].url | prepend: site.baseurl }}">Overview</a></li>
+		    {% else %}
+                        <li><a href="{{ site.posts[0].url | prepend: site.baseurl }}">Overview</a></li>
+		    {% endif %}
+		    {% if page.title == "Discrete Cosine Transform" %}
+                        <li class="active"><a href="{{ site.posts[1].url | prepend: site.baseurl }}">DCT</a></li>
+		        {% include post/navbar.html tags=ptags %}
+		    {% else %}
+                        <li><a href="{{ site.posts[1].url | prepend: site.baseurl }}">DCT</a></li>
+		    {% endif %}
+		    {% if page.title == "Lempel-Ziv-Welch" %}
+        	        <li class="active"><a href="{{ site.posts[2].url | prepend: site.baseurl }}">LZW</a></li>
+		        {% include post/navbar.html tags=ptags %}
+		    {% else %}
+        	        <li><a href="{{ site.posts[2].url | prepend: site.baseurl }}">LZW</a></li>
+		    {% endif %}
+		    {% if page.title == "Arithmetic Coding" %}
+		        <li class="active"><a href="{{ site.posts[3].url | prepend: site.baseurl }}">AC</a></li>
+		        {% include post/navbar.html tags=ptags %}
+		    {% else %}
+		        <li><a href="{{ site.posts[3].url | prepend: site.baseurl }}">AC</a></li>
+		    {% endif %}
+		    {% if page.title == "Comparisons" %}
+                        <li class="active"><a href="{{ site.posts[4].url | prepend: site.baseurl }}">Compare</a></li>
+		    {% else %}
+                        <li><a href="{{ site.posts[4].url | prepend: site.baseurl }}">Compare</a></li>
 		    {% endif %}
         	</ul>
-            </nav>
+	    </nav>
         </div>
 {% endif %}
 </div>

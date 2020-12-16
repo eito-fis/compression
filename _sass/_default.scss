@@ -432,18 +432,25 @@ $darkcloudy: darken($cloudy, 25%);
 .navwrap {
     position: absolute;
     top: 0;
-    right: -150px;
+    right: -170px;
     height: 100%;
 }
 
 $lesscloudy: transparentize($cloudy, 0.5);
+
 .navbar {
     position: sticky;
     top: 200px;
     left: 0px;
-    font-size: 20px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+
+.parent_navbar {
     padding-left: 20px;
     border-left: 2px solid $lesscloudy;
+    font-size: 20px;
+    width: 100px;
 }
 
 .navbar ul {
